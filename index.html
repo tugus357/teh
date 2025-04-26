@@ -3,140 +3,1113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kehilangan Teh Botol - WANTED</title>
+    <title>WANTED: The Mysterious Teh Botol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f5f5dc;
+        :root {
+            --primary-color: #0a0a0a;
+            --secondary-color: #ff0033;
+            --accent-color: #00ff9d;
+            --text-color: #ffffff;
+            --shadow: 0 5px 15px rgba(0,0,0,0.5);
+            --glow: 0 0 10px rgba(255, 0, 51, 0.5);
+            --neon-glow: 0 0 20px rgba(0, 255, 157, 0.5);
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            color: #333;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Roboto Mono', monospace;
+            background: var(--primary-color);
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 0, 51, 0.1) 0%, transparent 50%),
+                linear-gradient(45deg, rgba(0, 255, 157, 0.05) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(0, 255, 157, 0.05) 25%, transparent 25%);
+            background-size: 100% 100%, 20px 20px, 20px 20px;
+            background-position: 0 0, 0 0, 10px 10px;
+            position: relative;
+            overflow-x: hidden;
+            animation: backgroundPulse 10s ease-in-out infinite;
+        }
+
+        @keyframes backgroundPulse {
+            0%, 100% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 0%, rgba(0, 255, 157, 0.1) 50%, transparent 100%),
+                linear-gradient(0deg, transparent 0%, rgba(255, 0, 51, 0.1) 50%, transparent 100%);
+            pointer-events: none;
+            z-index: 1;
+            animation: gridPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes gridPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
         header {
-            background-color: #8b4513;
-            color: #f5f5dc;
+            background: linear-gradient(to bottom, #000, var(--primary-color));
+            color: var(--text-color);
             text-align: center;
-            padding: 20px 0;
-            border-bottom: 5px solid #5e2c04;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid var(--secondary-color);
+            box-shadow: var(--glow);
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
         }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="rgba(255,0,51,0.1)"/></svg>');
+            opacity: 0.2;
+            animation: flicker 0.5s infinite;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.2; }
+            50% { opacity: 0.1; }
+            100% { opacity: 0.2; }
+        }
+
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
         }
+
         .poster-section {
             text-align: center;
-            margin: 40px 0;
+            margin: 3rem 0;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+            position: relative;
+            perspective: 1000px;
         }
+
+        .poster-section::before {
+            content: 'WANTED';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            color: var(--secondary-color);
+            text-shadow: var(--glow);
+            opacity: 0.8;
+            z-index: 1;
+            letter-spacing: 5px;
+        }
+
         .poster {
             max-width: 500px;
             margin: 0 auto;
-            border: 15px solid #8b4513;
-            border-radius: 5px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border: 2px solid var(--secondary-color);
+            border-radius: 10px;
+            box-shadow: var(--shadow), var(--glow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            background: #000;
+            transform-style: preserve-3d;
+            animation: posterFloat 6s ease-in-out infinite, posterGlow 4s ease-in-out infinite;
         }
+
+        @keyframes posterFloat {
+            0%, 100% { transform: translateY(0) rotateX(0); }
+            50% { transform: translateY(-20px) rotateX(5deg); }
+        }
+
+        @keyframes posterGlow {
+            0%, 100% { box-shadow: var(--shadow), var(--neon-glow); }
+            50% { box-shadow: var(--shadow), var(--glow); }
+        }
+
+        .poster::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 45%, rgba(255, 0, 51, 0.2) 50%, transparent 55%);
+            animation: scan 2s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
         .poster img {
             width: 100%;
             display: block;
+            filter: grayscale(100%) contrast(120%) brightness(0.8);
+            transition: transform 0.3s ease;
         }
+
         .info-section {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin-bottom: 40px;
+            background-color: rgba(10, 10, 10, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow), var(--glow);
+            margin-bottom: 3rem;
+            border: 1px solid var(--secondary-color);
+            position: relative;
+            backdrop-filter: blur(10px);
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
+            animation: sectionPulse 4s ease-in-out infinite;
         }
+
+        .info-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="rgba(255,0,51,0.1)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .info-section:hover {
+            transform: translateZ(20px);
+        }
+
         h1, h2, h3 {
-            font-family: 'Courier New', monospace;
-            color: #8b4513;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            text-shadow: var(--glow);
+            letter-spacing: 2px;
         }
+
         .reward {
-            background-color: #8b4513;
-            color: #f5f5dc;
+            background: linear-gradient(135deg, #000, var(--primary-color));
+            color: var(--text-color);
             text-align: center;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 30px 0;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--secondary-color);
+            box-shadow: var(--shadow), var(--glow);
+            clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+            animation: rewardGlow 3s ease-in-out infinite;
         }
+
+        .reward::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 0, 51, 0.2) 0%, transparent 60%);
+            animation: rotate 10s linear infinite;
+        }
+
         .contact {
             text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            background-color: #eee;
-            border-radius: 10px;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: rgba(10, 10, 10, 0.9);
+            border-radius: 15px;
+            border: 1px solid var(--secondary-color);
+            box-shadow: var(--shadow), var(--glow);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
         }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 45%, rgba(0, 255, 157, 0.1) 50%, transparent 55%);
+            animation: scan 2s linear infinite;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .contact-item {
+            padding: 1.5rem;
+            background: var(--primary-color);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--secondary-color);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            animation: itemPulse 2s ease-in-out infinite;
+        }
+
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 157, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .contact-item:hover::before {
+            left: 100%;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            background: var(--secondary-color);
+            color: var(--text-color);
+            box-shadow: var(--glow);
+        }
+
         footer {
             text-align: center;
-            padding: 20px;
-            background-color: #8b4513;
-            color: #f5f5dc;
-            margin-top: 40px;
+            padding: 2rem;
+            background: linear-gradient(to top, #000, var(--primary-color));
+            color: var(--text-color);
+            margin-top: 3rem;
+            border-top: 2px solid var(--secondary-color);
+            box-shadow: var(--glow);
         }
+
         .blink {
-            animation: blinker 1.5s linear infinite;
-            color: #cc0000;
+            animation: blinker 1.5s linear infinite, blinkGlow 2s ease-in-out infinite;
+            color: var(--accent-color);
             font-weight: bold;
+            padding: 1rem;
+            border-radius: 8px;
+            background: rgba(255, 0, 51, 0.2);
+            border: 1px solid var(--secondary-color);
+            box-shadow: var(--glow);
+            position: relative;
+            overflow: hidden;
         }
+
+        .blink::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 157, 0.2), transparent);
+            animation: scan 2s linear infinite;
+        }
+
         @keyframes blinker {
+            50% { opacity: 0.3; }
+        }
+
+        @keyframes blinkGlow {
+            0%, 100% { box-shadow: var(--neon-glow); }
+            50% { box-shadow: var(--glow); }
+        }
+
+        .suspect-note {
+            font-size: 0.8rem;
+            font-style: italic;
+            margin-top: 1rem;
+            color: var(--accent-color);
+            text-shadow: var(--glow);
+        }
+
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.1;
+            background-image: 
+                linear-gradient(rgba(0, 255, 157, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 157, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: gridMove 20s linear infinite;
+            transform: perspective(500px) rotateX(60deg);
+        }
+
+        @keyframes gridMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(20px); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .poster {
+                max-width: 100%;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        .glitch-title {
+            position: relative;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-shadow: 0.05em 0 0 var(--secondary-color),
+                         -0.05em -0.025em 0 var(--accent-color),
+                         -0.025em 0.05em 0 #ff0000;
+            animation: glitch 500ms infinite, titleFloat 3s ease-in-out infinite;
+            letter-spacing: 5px;
+        }
+
+        @keyframes glitch {
+            0% {
+                text-shadow: 0.05em 0 0 var(--secondary-color),
+                            -0.05em -0.025em 0 var(--accent-color),
+                            -0.025em 0.05em 0 #ff0000;
+            }
+            14% {
+                text-shadow: 0.05em 0 0 var(--secondary-color),
+                            -0.05em -0.025em 0 var(--accent-color),
+                            -0.025em 0.05em 0 #ff0000;
+            }
+            15% {
+                text-shadow: -0.05em -0.025em 0 var(--secondary-color),
+                            0.025em 0.025em 0 var(--accent-color),
+                            -0.05em -0.05em 0 #ff0000;
+            }
+            49% {
+                text-shadow: -0.05em -0.025em 0 var(--secondary-color),
+                            0.025em 0.025em 0 var(--accent-color),
+                            -0.05em -0.05em 0 #ff0000;
+            }
             50% {
+                text-shadow: 0.025em 0.05em 0 var(--secondary-color),
+                            0.05em 0 0 var(--accent-color),
+                            0 -0.05em 0 #ff0000;
+            }
+            99% {
+                text-shadow: 0.025em 0.05em 0 var(--secondary-color),
+                            0.05em 0 0 var(--accent-color),
+                            0 -0.05em 0 #ff0000;
+            }
+            100% {
+                text-shadow: -0.025em 0 0 var(--secondary-color),
+                            -0.025em -0.025em 0 var(--accent-color),
+                            -0.025em -0.05em 0 #ff0000;
+            }
+        }
+
+        @keyframes titleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hacker-clown {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            pointer-events: none;
+            z-index: 1000;
+            filter: drop-shadow(0 0 10px var(--secondary-color));
+            transition: all 0.3s ease;
+            bottom: 20px;
+            left: 20px;
+            animation: clownPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes clownPulse {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px var(--secondary-color)); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 0 20px var(--accent-color)); }
+        }
+
+        .hacker-clown::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 45%, rgba(255, 0, 51, 0.2) 50%, transparent 55%);
+            animation: scan 2s linear infinite;
+            pointer-events: none;
+        }
+
+        .hacker-clown::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="rgba(255,0,51,0.1)"/></svg>');
+            opacity: 0.2;
+            animation: flicker 0.5s infinite;
+            pointer-events: none;
+        }
+
+        /* Add new interactive elements */
+        .interactive-element {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-element::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 157, 0.2), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .interactive-element:hover::after {
+            opacity: 1;
+        }
+
+        /* Add particle effects */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            animation: particleFloat 10s linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100vw); opacity: 0; }
+        }
+
+        /* Add glitch effect to images */
+        .glitch-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glitch-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 45%, rgba(255, 0, 51, 0.2) 50%, transparent 55%);
+            animation: scan 2s linear infinite;
+        }
+
+        /* Add typing effect to text */
+        .typing-text {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            display: inline-block;
+            animation: typing 3.5s steps(40, end) forwards;
+        }
+
+        .typing-text::after {
+            content: '|';
+            position: absolute;
+            right: -2px;
+            color: var(--accent-color);
+            animation: blink-caret 0.75s step-end infinite;
+            animation-duration: 0.75s;
+            animation-iteration-count: 3;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        /* Add new dynamic effects */
+        .dynamic-text {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dynamic-text::before {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent-color);
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            animation: glitch-text 3s infinite;
+        }
+
+        @keyframes glitch-text {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        /* Enhance particle effects */
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            animation: particleFloat 10s linear infinite;
+            box-shadow: 0 0 5px var(--accent-color);
+        }
+
+        @keyframes particleFloat {
+            0% { 
+                transform: translateY(0) translateX(0) scale(1);
                 opacity: 0;
             }
+            50% { 
+                opacity: 1;
+                transform: translateY(-50vh) translateX(50vw) scale(1.5);
+            }
+            100% { 
+                transform: translateY(-100vh) translateX(100vw) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Add hover effects to interactive elements */
+        .interactive-element {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-element::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 157, 0.2), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .interactive-element:hover::before {
+            opacity: 1;
+            animation: scan 2s linear infinite;
+        }
+
+        /* Add glitch effect to images */
+        .glitch-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glitch-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 45%, rgba(255, 0, 51, 0.2) 50%, transparent 55%);
+            animation: scan 2s linear infinite;
+            pointer-events: none;
+        }
+
+        .glitch-image:hover::before {
+            animation: glitch-scan 0.5s linear infinite;
+        }
+
+        @keyframes glitch-scan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Add dynamic background effect */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 50% 50%, rgba(0, 255, 157, 0.1) 0%, transparent 50%),
+                linear-gradient(45deg, rgba(255, 0, 51, 0.05) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255, 0, 51, 0.05) 25%, transparent 25%);
+            background-size: 100% 100%, 20px 20px, 20px 20px;
+            background-position: 0 0, 0 0, 10px 10px;
+            pointer-events: none;
+            z-index: 0;
+            animation: backgroundPulse 10s ease-in-out infinite;
+        }
+
+        /* Enhance title glitch effect */
+        .glitch-title::before,
+        .glitch-title::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+
+        .glitch-title::before {
+            color: var(--accent-color);
+            animation: glitch-effect 3s infinite;
+        }
+
+        .glitch-title::after {
+            color: var(--secondary-color);
+            animation: glitch-effect 2s infinite reverse;
+        }
+
+        @keyframes glitch-effect {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        /* Simplified music player styles */
+        .music-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.9);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--secondary-color);
+            box-shadow: var(--glow);
+        }
+
+        .music-controls button {
+            background: var(--secondary-color);
+            color: var(--text-color);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .music-controls button:hover {
+            background: var(--accent-color);
+            box-shadow: var(--glow);
+        }
+
+        /* Creepy cursor effect */
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease;
+        }
+
+        .custom-cursor::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+        }
+
+        /* Creepy message popup */
+        .creepy-message {
+            position: fixed;
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--accent-color);
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 1px solid var(--secondary-color);
+            box-shadow: var(--glow);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            width: 200px;
+            text-align: center;
+        }
+
+        .creepy-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Message positions */
+        .message-top-left {
+            top: 20px;
+            left: 20px;
+        }
+
+        .message-top-right {
+            top: 20px;
+            right: 20px;
+        }
+
+        .message-bottom-right {
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .message-center {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Jumpscare overlay */
+        .jumpscare {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.1s ease;
+        }
+
+        .jumpscare.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .jumpscare img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Add sound effect for jumpscare */
+        .jumpscare-sound {
+            display: none;
         }
     </style>
 </head>
 <body>
+    <div class="cyber-grid"></div>
+    <div class="particles"></div>
+    <img src="creepy.png" 
+         alt="Hacker Clown" 
+         class="hacker-clown">
+    
     <header>
-        <h1>KEHILANGAN TEH BOTOL</h1>
-        <p>Bantuan untuk menemukan Teh Botol favorit saya yang hilang</p>
+        <h1 class="glitch-title">WANTED: THE MYSTERIOUS TEH BOTOL</h1>
+        <p class="typing-text">terakhir di lihat di kulkas</p>
     </header>
     
     <div class="container">
-        <div class="poster-section">
-            <h2>WANTED POSTER</h2>
-            <div class="poster">
+        <div class="poster-section interactive">
+            <div class="poster glitch-image">
                 <img src="wanted-poster.png" alt="Wanted Poster Teh Botol">
             </div>
-            <p><em>Poster pencarian Teh Botol yang hilang</em></p>
+            <p class="typing-text"><em>berhati hati lah jika bertemu</em></p>
         </div>
         
-        <div class="info-section">
-            <h2>INFORMASI KEHILANGAN</h2>
-            <p>Saya telah kehilangan Teh Botol kesayangan saya. Terakhir terlihat di meja kantin pada hari Senin, 21 April 2025 pukul 12:30 WIB.</p>
+        <div class="info-section interactive">
+            <h2>CRIMINAL PROFILE</h2>
+            <p class="typing-text">This dangerous beverage was last seen in the cafeteria on Monday, April 21, 2025 at 12:30 PM. Considered armed and delicious.</p>
             
-            <h3>Ciri-ciri:</h3>
-            <ul>
-                <li>Kotak berwarna merah dengan logo Teh Botol</li>
-                <li>Masih berisi full</li>
-                <li>Terasa dingin saat terakhir kali dipegang</li>
-                <li>Memiliki rasa manis yang khas</li>
+            <h3>Identifying Characteristics:</h3>
+            <ul class="interactive-element">
+                <li>Red box with suspicious logo</li>
+                <li>Contents: Unknown liquid substance</li>
+                <li>Temperature: Cold to the touch</li>
+                <li>Known for its sweet and addictive taste</li>
             </ul>
             
-            <h3>Terakhir terlihat:</h3>
-            <p>Terakhir kali saya melihat Teh Botol saya adalah ketika saya meninggalkannya sejenak untuk mengambil makanan. Ketika kembali, Teh Botol saya sudah tidak ada di tempat.</p>
+            <h3>Last Known Whereabouts:</h3>
+            <p class="typing-text">Last seen when the victim briefly left to get food. When they returned, the suspect had vanished without a trace.</p>
             
-            <div class="blink">
-                <p>PENTING: Teh Botol ini memiliki nilai sentimental yang tinggi!</p>
+            <div class="blink interactive">
+                <p>WARNING: This beverage is highly addictive and may cause extreme thirst!</p>
             </div>
         </div>
         
-        <div class="reward">
-            <h2>HADIAH</h2>
-            <p>Bagi siapa saja yang dapat menemukan Teh Botol saya, baik dalam keadaan berisi maupun tidak, akan diberikan imbalan sebesar 15k</p>
+        <div class="reward interactive">
+            <h2>REWARD OFFERED</h2>
+            <p class="typing-text">For information leading to the capture of this dangerous beverage, dead or alive</p>
             <h1>Rp 155.000</h1>
-            <p><small>*suspect utama ajik dan wira</small></p>
+            <p class="suspect-note">*Primary suspects: ajik and wira - Considered armed and thirsty</p>
         </div>
         
-        <div class="contact">
-            <h2>HUBUNGI JIKA MENEMUKAN</h2>
-            <p>Telepon: 0811-TEH-BOTOL</p>
-            <p>Email: temukantehdanreward@tehbotol.id</p>
-            <p>Alamat: Jl. Minuman Segar No. 123, Kecamatan Dahaga, Kota Sejuk</p>
+        <div class="contact interactive">
+            <h2>CONTACT AUTHORITIES</h2>
+            <div class="contact-info">
+                <div class="contact-item interactive-element">
+                    <h3>Emergency Hotline</h3>
+                    <p>0811-TEH-BOTOL</p>
+                </div>
+                <div class="contact-item interactive-element">
+                    <h3>Secret Email</h3>
+                    <p>temukantehdanreward@tehbotol.id</p>
+                </div>
+                <div class="contact-item interactive-element">
+                    <h3>Secret Location</h3>
+                    <p>Jl. Minuman Segar No. 123<br>Kecamatan Dahaga, Kota Sejuk</p>
+                </div>
+            </div>
         </div>
     </div>
     
     <footer>
-        <p>&copy; 2025 Pencarian Teh Botol | Dibuat dengan <span style="color: #ff6b6b;">♥</span> dan kehausan</p>
+        <p>&copy; 2025 Teh Botol Investigation Unit | Created with <span style="color: var(--accent-color);">♥</span> and paranoia</p>
         <p><small>MARINE - "Kono sakunin ha fiction de..."</small></p>
     </footer>
+
+    <!-- Simplified audio element -->
+    <audio id="backgroundMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Simplified music controls -->
+    <div class="music-controls">
+        <button id="playPauseBtn">Play Music</button>
+    </div>
+
+    <!-- Add custom cursor -->
+    <div class="custom-cursor"></div>
+
+    <!-- Add multiple creepy message containers -->
+    <div class="creepy-message message-top-left"></div>
+    <div class="creepy-message message-top-right"></div>
+    <div class="creepy-message message-bottom-right"></div>
+    <div class="creepy-message message-center"></div>
+
+    <!-- Add jumpscare elements -->
+    <div class="jumpscare">
+        <img src="https://www.gifcen.com/wp-content/uploads/2022/11/creepy-gif-2.gif" alt="Jumpscare">
+    </div>
+    <audio id="jumpscareSound" class="jumpscare-sound">
+        <source src="https://www.soundjay.com/human/sounds/scream-01.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Enhanced particle system
+        function createParticles() {
+            const particles = document.querySelector('.particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.opacity = Math.random() * 0.5 + 0.5;
+                particles.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // Add dynamic text effect
+        document.querySelectorAll('.dynamic-text').forEach(element => {
+            element.setAttribute('data-text', element.textContent);
+        });
+
+        // Simplified music player functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const music = document.getElementById('backgroundMusic');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+
+            // Set initial volume
+            music.volume = 0.3;
+
+            // Play/Pause functionality
+            playPauseBtn.addEventListener('click', function() {
+                if (music.paused) {
+                    music.play()
+                        .then(() => {
+                            playPauseBtn.textContent = 'Pause Music';
+                        })
+                        .catch(error => {
+                            console.log("Playback failed:", error);
+                            alert("Please click the play button to start the music");
+                        });
+                } else {
+                    music.pause();
+                    playPauseBtn.textContent = 'Play Music';
+                }
+            });
+        });
+
+        // Modified creepy messages
+        const messages = [
+            "They're watching...",
+            "Don't look behind you...",
+            "The tea is not what it seems...",
+            "Can you hear the whispers?",
+            "The clown knows your secrets...",
+            "The reward is a trap...",
+            "The suspects are closer than you think...",
+            "The tea is still warm...",
+            "The cafeteria is empty now...",
+            "The clown is not what it seems..."
+        ];
+
+        function showCreepyMessage() {
+            const messageElements = document.querySelectorAll('.creepy-message');
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            
+            // Show message in random position
+            const randomElement = messageElements[Math.floor(Math.random() * messageElements.length)];
+            randomElement.textContent = randomMessage;
+            randomElement.classList.add('show');
+
+            setTimeout(() => {
+                randomElement.classList.remove('show');
+            }, 3000);
+        }
+
+        // Show random messages
+        setInterval(showCreepyMessage, 10000);
+
+        // Remove random movement for clown
+        function moveClownRandomly() {
+            // Clown now stays in corner
+            const clown = document.querySelector('.hacker-clown');
+            clown.style.transform = 'scale(1)';
+        }
+
+        // Custom cursor effect
+        const cursor = document.querySelector('.custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Enhance hover effects
+        document.querySelectorAll('.interactive-element').forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(1.5)';
+            });
+
+            element.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+            });
+        });
+
+        // Jumpscare functionality
+        function triggerJumpscare() {
+            const jumpscare = document.querySelector('.jumpscare');
+            const sound = document.getElementById('jumpscareSound');
+            
+            // Show jumpscare
+            jumpscare.classList.add('show');
+            
+            // Play sound
+            sound.volume = 0.5;
+            sound.play().catch(error => console.log("Sound play failed:", error));
+            
+            // Hide after 2 seconds
+            setTimeout(() => {
+                jumpscare.classList.remove('show');
+            }, 2000);
+        }
+
+        // Random jumpscare timing (1-30 seconds)
+        function scheduleJumpscare() {
+            // Random time between 1 and 30 seconds
+            const randomTime = Math.random() * 29000 + 1000; // 1000ms to 30000ms
+            
+            setTimeout(() => {
+                triggerJumpscare();
+                // Schedule next jumpscare
+                scheduleJumpscare();
+            }, randomTime);
+        }
+
+        // Start scheduling jumpscares
+        scheduleJumpscare();
+    </script>
 </body>
 </html>
